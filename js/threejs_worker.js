@@ -25,7 +25,7 @@ var markers = {
         width: 1000,
         height: 607,
         dpi: 300,
-        url: "DataNFT/greenlight"
+        url: "https://avo-content-dev.s3.amazonaws.com/campaign-manager/markers/greenlight/greenlight",
     }
 };
 
