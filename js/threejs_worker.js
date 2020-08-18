@@ -41,7 +41,7 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-function start(container, marker, video, input_width, input_height, canvas_draw, render_update, track_update, greyCover) {
+function start(container, marker, video, input_width, input_height, canvas_draw) {
     var vw, vh;
     var sw, sh;
     var pscale, sscale;
@@ -148,7 +148,6 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
                     break;
                 }
             }
-            track_update();
             process();
         };
     };
@@ -167,7 +166,6 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     var time = 0;
 
     var draw = function () {
-        render_update();
         var now = Date.now();
         var dt = now - lasttime;
         time += dt;

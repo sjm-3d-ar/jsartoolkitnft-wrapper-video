@@ -46,9 +46,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
               video.videoWidth,
               video.videoHeight,
               canvas,
-              () => { },
-              () => { },
-              null
           );
       });
   });
