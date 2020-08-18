@@ -14,6 +14,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       audio: false,
       video: true
   };
+
   if (window.innerWidth < 800) {
       var width = (window.innerWidth < window.innerHeight) ? 240 : 360;
       var height = (window.innerWidth < window.innerHeight) ? 360 : 240;

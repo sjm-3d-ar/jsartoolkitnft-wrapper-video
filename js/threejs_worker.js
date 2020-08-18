@@ -49,9 +49,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
     var pw, ph;
     var ox, oy;
     var worker;
-    // ! Fix pathing for camera_para.dat; it's relative to where artoolkitNFT_wasm.js resides
-    // TODO Fix pathing for camera_para.dat; it's relative to where artoolkitNFT_wasm.js resides
-    // TODO See cameraParamUrl code in ARnft > Worker.js for reference
+
     var camera_para = 'Data/camera_para.dat'
 
     var canvas_process = document.createElement('canvas');
