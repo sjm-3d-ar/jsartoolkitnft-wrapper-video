@@ -106,8 +106,6 @@ function start(container, marker, video, input_width, input_height, canvas_draw,
 
         worker = new Worker('libs/artoolkitNFT.worker.js');
 
-        console.log('worker camera_para:', camera_para);
-
         worker.postMessage({ type: "load", pw: pw, ph: ph, camera_para: camera_para, marker: marker.url });
 
         worker.onmessage = function (ev) {

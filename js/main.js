@@ -39,8 +39,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       video.addEventListener('loadedmetadata', function () {
           video.play();
 
-          console.log('video:', video, video.videoWidth, video.videoHeight);
-
           start(
               container,
               markers['greenlight'],
