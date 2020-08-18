@@ -41,8 +41,6 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     var ox, oy;
     var worker;
 
-    var camera_para = 'Data/camera_para.dat'
-
     var canvas_process = document.createElement('canvas');
     var context_process = canvas_process.getContext('2d');
 
@@ -101,7 +99,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
             type: "load", 
             pw: pw, 
             ph: ph, 
-            camera_para: camera_para, 
+            camera_para: 'Data/camera_para.dat', 
             marker: marker.url 
         });
 
@@ -171,17 +169,18 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
         if (!world) {
             videoPlane.visible = false;
         } else {
-          videoPlane.visible = true;
-                // interpolate matrix
-                for (var i = 0; i < 16; i++) {
-                  trackedMatrix.delta[i] = world[i] - trackedMatrix.interpolated[i];
-                  trackedMatrix.interpolated[i] =
-                    trackedMatrix.interpolated[i] +
-                    trackedMatrix.delta[i] / interpolationFactor;
-                }
+            videoPlane.visible = true;
 
-                // set matrix of 'root' by detected 'world' matrix
-                setMatrix(root.matrix, trackedMatrix.interpolated);
+            // interpolate matrix
+            for (var i = 0; i < 16; i++) {
+                trackedMatrix.delta[i] = world[i] - trackedMatrix.interpolated[i];
+                trackedMatrix.interpolated[i] =
+                trackedMatrix.interpolated[i] +
+                trackedMatrix.delta[i] / interpolationFactor;
+            }
+
+            // set matrix of 'root' by detected 'world' matrix
+            setMatrix(root.matrix, trackedMatrix.interpolated);
         }
         renderer.render(scene, camera);
     };
@@ -194,6 +193,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
         var imageData = context_process.getImageData(0, 0, pw, ph);
         worker.postMessage({ type: 'process', imagedata: imageData }, [imageData.data.buffer]);
     }
+
     var tick = function () {
         draw();
         requestAnimationFrame(tick);
