@@ -35,18 +35,25 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   }
 
   navigator.mediaDevices.getUserMedia(hint).then(function (stream) {
-      video.srcObject = stream;
-      video.addEventListener('loadedmetadata', function () {
-          video.play();
+    video.srcObject = stream;
+    video.addEventListener('loadedmetadata', function () {
+        video.play();
 
-          start(
-              container,
-              markers['greenlight'],
-              video,
-              video.videoWidth,
-              video.videoHeight,
-              canvas,
-          );
-      });
+        const marker = {
+            width: 1000,
+            height: 607,
+            dpi: 300,
+            url: "https://avo-content-dev.s3.amazonaws.com/campaign-manager/markers/greenlight/greenlight",
+        };
+
+        start(
+            container,
+            marker,
+            video,
+            video.videoWidth,
+            video.videoHeight,
+            canvas,
+        );
+    });
   });
 }

@@ -20,15 +20,6 @@ var trackedMatrix = {
   ]
 }
 
-var markers = {
-    greenlight: {
-        width: 1000,
-        height: 607,
-        dpi: 300,
-        url: "https://avo-content-dev.s3.amazonaws.com/campaign-manager/markers/greenlight/greenlight",
-    }
-};
-
 var setMatrix = function (matrix, value) {
     var array = [];
     for (var key in value) {
@@ -106,7 +97,13 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
 
         worker = new Worker('libs/artoolkitNFT.worker.js');
 
-        worker.postMessage({ type: "load", pw: pw, ph: ph, camera_para: camera_para, marker: marker.url });
+        worker.postMessage({
+            type: "load", 
+            pw: pw, 
+            ph: ph, 
+            camera_para: camera_para, 
+            marker: marker.url 
+        });
 
         worker.onmessage = function (ev) {
             var msg = ev.data;
@@ -131,7 +128,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
                         // removing loader page if present
                         var loader = document.getElementById('loading');
                         if (loader) {
-                            loader.querySelector('.loading-text').innerText = 'Start the tracking!';
+                            loader.querySelector('.loading-text').innerText = 'Start tracking!';
                             setTimeout(function(){
                                 loader.parentElement.removeChild(loader);
                             }, 2000);
