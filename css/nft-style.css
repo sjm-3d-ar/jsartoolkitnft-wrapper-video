@@ -35,6 +35,14 @@ html {
   height: 100%;
 }
 
+#videoSrc {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2;
+}
+
+
 #video {
   position: absolute;
   top: 0;
