@@ -78,10 +78,10 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     // TODO: NOTE, it seems the msg height, dpi values are retrieved from then marker descriptor files (not the)
     // TODO: which is probably why this is set using 'getNFTData' event (likely triggered once desc files are loaded)
 
-    videoPlane.position.z = 0;
-    videoPlane.position.x = 42;
-    videoPlane.position.y = 25;
-    videoPlane.scale.set(20, 20, 20);
+    videoPlane.position.y = (marker.height / marker.dpi * 2.54 * 10) / 2.0
+    videoPlane.position.x = (marker.width / marker.dpi * 2.54 * 10) / 2.0
+    
+    videoPlane.scale.set(marker.scale, marker.scale, marker.scale);
 
     root.add(videoPlane);
 
