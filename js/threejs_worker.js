@@ -76,6 +76,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     // TODO: in ARnft.js add() method
     // TODO: pixel to meter conversion?  "(msg.height / msg.dpi * 2.54 * 10) / 2.0"
     // TODO: NOTE, it seems the msg height, dpi values are retrieved from then marker descriptor files (not the)
+    // TODO: which is probably why this is set using 'getNFTData' event (likely triggered once desc files are loaded)
 
     videoPlane.position.z = 0;
     videoPlane.position.x = 42;
