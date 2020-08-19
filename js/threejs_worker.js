@@ -63,6 +63,12 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     const mat = new THREE.MeshLambertMaterial({ color: 0xbbbbff, map: texture });
     const planeGeom = new THREE.PlaneGeometry(4, 3, 1, 1);
     const videoPlane = new THREE.Mesh(planeGeom, mat);
+
+    // TODO: Note, the objects positioning over the tracked object gets set
+    // TODO: in ARnft.js add() method
+    // TODO: pixel to meter conversion?  "(msg.height / msg.dpi * 2.54 * 10) / 2.0"
+    // TODO: NOTE, it seems the msg height, dpi values are retrieved from then marker descriptor files (not the)
+
     videoPlane.position.z = 0;
     videoPlane.position.x = 42;
     videoPlane.position.y = 25;

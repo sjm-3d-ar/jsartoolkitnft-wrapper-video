@@ -40,9 +40,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         video.play();
 
         const marker = {
-            width: 1000,
-            height: 607,
-            dpi: 300,
             url: "https://avo-content-dev.s3.amazonaws.com/campaign-manager/markers/greenlight/greenlight",
         };
 
