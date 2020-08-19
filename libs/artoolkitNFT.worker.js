@@ -1,4 +1,6 @@
-importScripts('artoolkitNFT_wasm.js');
+var next = null;
+var ar = null;
+var markerResult = null;
 
 self.onmessage = function (e) {
   var msg = e.data;
@@ -15,11 +17,9 @@ self.onmessage = function (e) {
   }
 };
 
-var next = null;
-var ar = null;
-var markerResult = null;
-
 function load (msg) {
+  importScripts('artoolkitNFT_wasm.js');
+
   self.addEventListener('artoolkitNFT-loaded', function () {
     var onLoad = function () {
       ar = new ARControllerNFT(msg.pw, msg.ph, param);
