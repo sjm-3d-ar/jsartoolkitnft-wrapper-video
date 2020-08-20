@@ -90,7 +90,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
 
     setupScene(renderer, scene, camera, root, marker);
 
-    var load = function () {
+    function load() {
         vw = input_width;
         vh = input_height;
 
@@ -171,7 +171,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
         };
     };
 
-    var found = function (msg) {
+    function found(msg) {
       if (!msg) {
         world = null;
       } else {
@@ -179,7 +179,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
       }
     };
 
-    var draw = function () {
+    function draw() {
         if (!world) {
             root.visible = false;
         } else {
@@ -199,7 +199,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
         renderer.render(scene, camera);
     };
 
-    function process () {
+    function process() {
         context_process.fillStyle = 'black';
         context_process.fillRect(0, 0, pw, ph);
         context_process.drawImage(video, 0, 0, vw, vh, ox, oy, w, h);
@@ -208,7 +208,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
         worker.postMessage({ type: 'process', imagedata: imageData }, [imageData.data.buffer]);
     }
 
-    var tick = function () {
+    function tick() {
         draw();
         requestAnimationFrame(tick);
     };
