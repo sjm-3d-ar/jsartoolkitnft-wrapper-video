@@ -72,6 +72,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     var w, h;
     var pw, ph;
     var ox, oy;
+    var world;
     var worker;
 
     var canvas_process = document.createElement('canvas');
@@ -140,6 +141,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
                     setMatrix(camera.projectionMatrix, proj);
                     break;
                 }
+
                 case "endLoading": {
                     if (msg.end == true) {
                         // removing loader page if present
@@ -148,25 +150,26 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
                             loader.querySelector('.loading-text').innerText = 'Start tracking!';
                             setTimeout(function(){
                                 loader.parentElement.removeChild(loader);
-                            }, 2000);
+                            }, 1000);
                         }
                     }
                     break;
                 }
+                
                 case 'found': {
                     found(msg);
                     break;
                 }
+                
                 case 'not found': {
                     found(null);
                     break;
                 }
             }
+            
             process();
         };
     };
-
-    var world;
 
     var found = function (msg) {
       if (!msg) {
