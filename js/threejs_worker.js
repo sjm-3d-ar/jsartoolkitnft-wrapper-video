@@ -32,37 +32,15 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-function start(container, marker, video, input_width, input_height, canvas_draw) {
-    var vw, vh;
-    var sw, sh;
-    var pscale, sscale;
-    var w, h;
-    var pw, ph;
-    var ox, oy;
-    var worker;
-
-    var canvas_process = document.createElement('canvas');
-    var context_process = canvas_process.getContext('2d');
-
-    var renderer = new THREE.WebGLRenderer({
-        canvas: canvas_draw, 
-        alpha: true, 
-        antialias: true, 
-        precision: "mediump",
-    });
+const setupScene = (renderer, scene, camera, root, marker) => {
     renderer.setPixelRatio(window.devicePixelRatio);
-
-    var scene = new THREE.Scene();
-
-    var camera = new THREE.Camera();
+    
     camera.matrixAutoUpdate = false;
-
     scene.add(camera);
 
     const light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
 
-    var root = new THREE.Object3D();
     scene.add(root);
     root.matrixAutoUpdate = false;
 
@@ -82,8 +60,34 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     videoPlane.position.x = (marker.width / marker.dpi * 2.54 * 10) / 2.0
     
     videoPlane.scale.set(marker.scale, marker.scale, marker.scale);
+    videoPlane.visible = true;
 
     root.add(videoPlane);
+};
+
+function start(container, marker, video, input_width, input_height, canvas_draw) {
+    var vw, vh;
+    var sw, sh;
+    var pscale, sscale;
+    var w, h;
+    var pw, ph;
+    var ox, oy;
+    var worker;
+
+    var canvas_process = document.createElement('canvas');
+    var context_process = canvas_process.getContext('2d');
+
+    var renderer = new THREE.WebGLRenderer({
+        canvas: canvas_draw, 
+        alpha: true, 
+        antialias: true, 
+        precision: "mediump",
+    });
+    var scene = new THREE.Scene();    
+    var camera = new THREE.Camera();
+    var root = new THREE.Object3D();
+
+    setupScene(renderer, scene, camera, root, marker);
 
     var load = function () {
         vw = input_width;
@@ -182,9 +186,9 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
         lasttime = now;
 
         if (!world) {
-            videoPlane.visible = false;
+            root.visible = false;
         } else {
-            videoPlane.visible = true;
+            root.visible = true;
 
             // interpolate matrix
             for (var i = 0; i < 16; i++) {
