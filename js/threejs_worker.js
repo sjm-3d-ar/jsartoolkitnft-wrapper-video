@@ -65,7 +65,7 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     root.add(videoPlane);
 };
 
-function start(container, marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
+function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
     var vw, vh;
     var sw, sh;
     var pScale, sScale;

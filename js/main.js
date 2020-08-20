@@ -1,7 +1,6 @@
 /**
  * APP / ELEMENTS
  */
-var appContainer = document.getElementById('app');
 var cameraVideo = document.getElementById('cameraVideo');
 var cameraCanvas = document.getElementById('cameraCanvas');
 
@@ -53,7 +52,6 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         };
 
         start(
-            appContainer,
             marker,
             cameraVideo,
             cameraVideo.videoWidth,
