@@ -176,15 +176,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
       }
     };
 
-    var lastTime = Date.now();
-    var time = 0;
-
     var draw = function () {
-        var now = Date.now();
-        var dt = now - lastTime;
-        time += dt;
-        lastTime = now;
-
         if (!world) {
             root.visible = false;
         } else {
