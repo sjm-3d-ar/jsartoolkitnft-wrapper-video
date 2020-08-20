@@ -2,7 +2,7 @@
  * APP / ELEMENTS
  */
 var appContainer = document.getElementById('app');
-var video = document.getElementById('video');
+var cameraVideo = document.getElementById('cameraVideo');
 var cameraCanvas = document.getElementById('cameraCanvas');
 
 /**
@@ -35,9 +35,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   }
 
   navigator.mediaDevices.getUserMedia(hint).then(function (stream) {
-    video.srcObject = stream;
-    video.addEventListener('loadedmetadata', function () {
-        video.play();
+    cameraVideo.srcObject = stream;
+    cameraVideo.addEventListener('loadedmetadata', function () {
+        cameraVideo.play();
 
         const marker = {
             // width: 1000,
@@ -55,9 +55,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         start(
             appContainer,
             marker,
-            video,
-            video.videoWidth,
-            video.videoHeight,
+            cameraVideo,
+            cameraVideo.videoWidth,
+            cameraVideo.videoHeight,
             cameraCanvas,
         );
     });
