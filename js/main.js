@@ -1,9 +1,9 @@
 /**
  * APP / ELEMENTS
  */
-var container = document.getElementById('app');
+var appContainer = document.getElementById('app');
 var video = document.getElementById('video');
-var canvas = document.getElementById('canvas');
+var cameraCanvas = document.getElementById('cameraCanvas');
 
 /**
  * APP / VIDEO STREAM
@@ -53,12 +53,12 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         };
 
         start(
-            container,
+            appContainer,
             marker,
             video,
             video.videoWidth,
             video.videoHeight,
-            canvas,
+            cameraCanvas,
         );
     });
   });

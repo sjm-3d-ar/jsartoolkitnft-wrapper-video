@@ -44,7 +44,7 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     scene.add(root);
     root.matrixAutoUpdate = false;
 
-    const ARVideo = document.getElementById('videoSrc');
+    const ARVideo = document.getElementById('campaignVideo');
     const texture = new THREE.VideoTexture(ARVideo);
     const mat = new THREE.MeshLambertMaterial({ color: 0xbbbbff, map: texture });
     const planeGeom = new THREE.PlaneGeometry(4, 3, 1, 1);
