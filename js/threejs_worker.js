@@ -68,7 +68,7 @@ const setupScene = (renderer, scene, camera, root, marker) => {
 function start(container, marker, video, input_width, input_height, canvas_draw) {
     var vw, vh;
     var sw, sh;
-    var pscale, sscale;
+    var pScale, sScale;
     var w, h;
     var pw, ph;
     var ox, oy;
@@ -93,14 +93,14 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
         vw = input_width;
         vh = input_height;
 
-        pscale = 320 / Math.max(vw, vh / 3 * 4);
-        sscale = isMobile() ? window.outerWidth / input_width : 1;
+        pScale = 320 / Math.max(vw, vh / 3 * 4);
+        sScale = isMobile() ? window.outerWidth / input_width : 1;
 
-        sw = vw * sscale;
-        sh = vh * sscale;
+        sw = vw * sScale;
+        sh = vh * sScale;
 
-        w = vw * pscale;
-        h = vh * pscale;
+        w = vw * pScale;
+        h = vh * pScale;
         pw = Math.max(w, h / 3 * 4);
         ph = Math.max(h, w / 4 * 3);
         ox = (pw - w) / 2;
@@ -176,14 +176,14 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
       }
     };
 
-    var lasttime = Date.now();
+    var lastTime = Date.now();
     var time = 0;
 
     var draw = function () {
         var now = Date.now();
-        var dt = now - lasttime;
+        var dt = now - lastTime;
         time += dt;
-        lasttime = now;
+        lastTime = now;
 
         if (!world) {
             root.visible = false;
