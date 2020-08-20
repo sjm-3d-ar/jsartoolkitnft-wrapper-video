@@ -65,7 +65,7 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     root.add(videoPlane);
 };
 
-function start(container, marker, video, input_width, input_height, canvas_draw) {
+function start(container, marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
     var vw, vh;
     var sw, sh;
     var pScale, sScale;
@@ -79,7 +79,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     var context_process = canvas_process.getContext('2d');
 
     var renderer = new THREE.WebGLRenderer({
-        canvas: canvas_draw, 
+        canvas: cameraCanvas, 
         alpha: true, 
         antialias: true, 
         precision: "mediump",
@@ -91,11 +91,11 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     setupScene(renderer, scene, camera, root, marker);
 
     function load() {
-        vw = input_width;
-        vh = input_height;
+        vw = cameraVideoW;
+        vh = cameraVideoH;
 
         pScale = 320 / Math.max(vw, vh / 3 * 4);
-        sScale = isMobile() ? window.outerWidth / input_width : 1;
+        sScale = isMobile() ? window.outerWidth / cameraVideoW : 1;
 
         sw = vw * sScale;
         sh = vh * sScale;
@@ -202,7 +202,7 @@ function start(container, marker, video, input_width, input_height, canvas_draw)
     function process() {
         context_process.fillStyle = 'black';
         context_process.fillRect(0, 0, pw, ph);
-        context_process.drawImage(video, 0, 0, vw, vh, ox, oy, w, h);
+        context_process.drawImage(cameraVideo, 0, 0, vw, vh, ox, oy, w, h);
 
         var imageData = context_process.getImageData(0, 0, pw, ph);
         worker.postMessage({ type: 'process', imagedata: imageData }, [imageData.data.buffer]);
