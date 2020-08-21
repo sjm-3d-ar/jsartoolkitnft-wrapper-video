@@ -62,6 +62,9 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     videoPlane.scale.set(marker.scale, marker.scale, marker.scale);
     videoPlane.visible = true;
 
+    // const axesHelper = new THREE.AxesHelper(50);
+    // root.add(axesHelper);
+
     root.add(videoPlane);
 };
 
