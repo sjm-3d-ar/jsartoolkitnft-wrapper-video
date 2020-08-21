@@ -2,7 +2,8 @@ function isMobile () {
     return /Android|mobile|iPad|iPhone/i.test(navigator.userAgent);
 }
 
-var interpolationFactor = 24;
+// NOTE: the original value of this was 24, which was very smooth, but slower to track
+var interpolationFactor = 12;
 
 var trackedMatrix = {
   // for interpolation
