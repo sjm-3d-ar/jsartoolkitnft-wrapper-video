@@ -3,7 +3,7 @@ function isMobile () {
 }
 
 // NOTE: the original value of this was 24, which was very smooth, but slower to track
-var interpolationFactor = 5;
+var interpolationFactor = 6;
 
 var trackedMatrix = {
   // for interpolation
