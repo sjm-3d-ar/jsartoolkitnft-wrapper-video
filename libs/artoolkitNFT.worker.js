@@ -30,8 +30,9 @@ function load (msg) {
       });
 
       ar.loadNFTMarker(msg.marker, function (nft) {
-        // TBD: if you wish to get w, h, dpi from loaded image, can read from nft here
-        //      and post nftData, getNFTData messages here to pass those to videoPlane
+        // to get w, h, dpi from loaded image, can read from nft here
+        // and post nftData, getNFTData messages here to pass those to videoPlane
+        postMessage({type: "nftData", nft: JSON.stringify(nft)});
         
         ar.trackNFTMarkerId(nft.id);
         console.log("loadNFTMarker -> ", nft.id);

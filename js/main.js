@@ -44,10 +44,10 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             // dpi: 300,
             // scale: 20,
             // url: "https://avo-content-dev.s3.amazonaws.com/campaign-manager/markers/greenlight/greenlight",
-            width: 927,
-            height: 486,
-            dpi: 72,
-            scale: 75,
+            // width: 927,
+            // height: 486,
+            // dpi: 72,
+            // scale: 75,
             url: "https://avo-content-dev.s3.amazonaws.com/campaign-manager/markers/abc_dental/abc_dental",
         };
 

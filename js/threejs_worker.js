@@ -53,6 +53,17 @@ const setupScene = (renderer, scene, camera, root, marker) => {
 
     const planeGeom = new THREE.PlaneBufferGeometry(4, 3, 1, 1);
     const videoPlane = new THREE.Mesh(planeGeom, mat);
+    videoPlane.name = "videoPlane";
+
+    // const axesHelper = new THREE.AxesHelper(50);
+    // root.add(axesHelper);
+
+    root.add(videoPlane);
+};
+
+function updateVideoPosition(scene, imageData) {
+
+    const videoPlane = scene.getObjectByName("videoPlane");
 
     // TODO: Note, the objects positioning over the tracked object gets set
     // TODO: in ARnft.js add() method
@@ -60,17 +71,12 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     // TODO: NOTE, it seems the msg height, dpi values are retrieved from then marker descriptor files (not the)
     // TODO: which is probably why this is set using 'getNFTData' event (likely triggered once desc files are loaded)
 
-    videoPlane.position.y = (marker.height / marker.dpi * 2.54 * 10) / 2.0
-    videoPlane.position.x = (marker.width / marker.dpi * 2.54 * 10) / 2.0
+    videoPlane.position.y = (imageData.height / imageData.dpi * 2.54 * 10) / 2.0;
+    videoPlane.position.x = (imageData.width / imageData.dpi * 2.54 * 10) / 2.0;
     
-    videoPlane.scale.set(marker.scale, marker.scale, marker.scale);
+    videoPlane.scale.set(60, 60, 60);
     videoPlane.visible = true;
-
-    // const axesHelper = new THREE.AxesHelper(50);
-    // root.add(axesHelper);
-
-    root.add(videoPlane);
-};
+}
 
 function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
     var vw, vh;
@@ -160,6 +166,17 @@ function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
                             }, 1000);
                         }
                     }
+                    break;
+                }
+
+                case "nftData": {
+                    const nft = JSON.parse(msg.nft);
+                    const imageData = {
+                        dpi: nft.dpi,
+                        width: nft.width,
+                        height: nft.height,
+                    };
+                    updateVideoPosition(scene, imageData);
                     break;
                 }
                 
