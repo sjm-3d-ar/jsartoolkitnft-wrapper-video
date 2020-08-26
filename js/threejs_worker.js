@@ -39,16 +39,19 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     camera.matrixAutoUpdate = false;
     scene.add(camera);
 
-    const light = new THREE.AmbientLight(0xffffff);
-    scene.add(light);
-
     scene.add(root);
     root.matrixAutoUpdate = false;
 
     const ARVideo = document.getElementById('campaignVideo');
     const texture = new THREE.VideoTexture(ARVideo);
-    const mat = new THREE.MeshLambertMaterial({ color: 0xbbbbff, map: texture });
-    const planeGeom = new THREE.PlaneGeometry(4, 3, 1, 1);
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.LinearFilter;
+    texture.format = THREE.RGBFormat;
+
+    // note, using a MeshBasicMaterial does not require a light
+	const mat = new THREE.MeshBasicMaterial( { map: texture } );
+
+    const planeGeom = new THREE.PlaneBufferGeometry(4, 3, 1, 1);
     const videoPlane = new THREE.Mesh(planeGeom, mat);
 
     // TODO: Note, the objects positioning over the tracked object gets set
