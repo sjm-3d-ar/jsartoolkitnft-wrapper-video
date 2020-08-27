@@ -106,6 +106,10 @@ function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
 
     setupScene(renderer, scene, camera, root, marker, campaignVideoEl);
 
+    function found(msg) {
+        world = msg ? JSON.parse(msg.matrixGL_RH) : null;
+    };
+
     function load() {
         vw = cameraVideoW;
         vh = cameraVideoH;
@@ -196,14 +200,6 @@ function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
             
             process();
         };
-    };
-
-    function found(msg) {
-      if (!msg) {
-        world = null;
-      } else {
-        world = JSON.parse(msg.matrixGL_RH);
-      }
     };
 
     function draw() {
