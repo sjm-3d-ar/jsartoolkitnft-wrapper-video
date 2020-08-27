@@ -36,7 +36,7 @@ var setMatrix = function (matrix, value) {
     }
 };
 
-const setupScene = (renderer, scene, camera, root, marker) => {
+const setupScene = (renderer, scene, camera, root, marker, campaignVideoEl) => {
     renderer.setPixelRatio(window.devicePixelRatio);
     
     camera.matrixAutoUpdate = false;
@@ -45,8 +45,7 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     scene.add(root);
     root.matrixAutoUpdate = false;
 
-    const ARVideo = document.getElementById('campaignVideo');
-    const texture = new THREE.VideoTexture(ARVideo);
+    const texture = new THREE.VideoTexture(campaignVideoEl);
 	texture.minFilter = THREE.LinearFilter;
 	texture.magFilter = THREE.LinearFilter;
     texture.format = THREE.RGBFormat;
@@ -103,7 +102,9 @@ function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
     var camera = new THREE.Camera();
     var root = new THREE.Object3D();
 
-    setupScene(renderer, scene, camera, root, marker);
+    const campaignVideoEl = document.getElementById('campaignVideo');
+
+    setupScene(renderer, scene, camera, root, marker, campaignVideoEl);
 
     function load() {
         vw = cameraVideoW;
