@@ -79,6 +79,17 @@ function setObjectPositionAndScale(scene, imageData) {
     videoPlane.visible = true;
 }
 
+logSync = (...args) => {
+  try {
+    args = args.map((arg) => JSON.parse(JSON.stringify(arg)));
+    console.log(...args);
+  } catch (error) {
+    console.log('Error trying to console.logSync()', ...args);
+  }
+};
+
+let isFound = false;
+
 function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
     var vw, vh;
     var sw, sh;
@@ -109,6 +120,14 @@ function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
     function found(msg) {
         world = msg ? JSON.parse(msg.matrixGL_RH) : null;
     };
+
+    const playVideo = () => {
+        campaignVideoEl.play();
+    }
+
+    const pauseVideo = () => {
+        campaignVideoEl.pause();
+    }
 
     function load() {
         vw = cameraVideoW;
@@ -188,11 +207,21 @@ function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
                 }
                 
                 case 'found': {
+                    if (!isFound) {
+                        playVideo();
+                        isFound = true;
+                    }
+
                     found(msg);
                     break;
                 }
                 
                 case 'not found': {
+                    if (isFound) {
+                        pauseVideo();
+                        isFound = false;
+                    }
+                    
                     found(null);
                     break;
                 }
