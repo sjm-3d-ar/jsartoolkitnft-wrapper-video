@@ -1,3 +1,6 @@
+const VIDEO_WIDTH_16 = 16;
+const VIDEO_HEIGHT_9 = 9;
+
 function isMobile () {
     return /Android|mobile|iPad|iPhone/i.test(navigator.userAgent);
 }
@@ -51,7 +54,7 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     // note, using a MeshBasicMaterial does not require a light
 	const mat = new THREE.MeshBasicMaterial( { map: texture } );
 
-    const planeGeom = new THREE.PlaneBufferGeometry(4, 3, 1, 1);
+    const planeGeom = new THREE.PlaneBufferGeometry(VIDEO_WIDTH_16, VIDEO_HEIGHT_9, 1, 1);
     const videoPlane = new THREE.Mesh(planeGeom, mat);
     videoPlane.name = "videoPlane";
 
@@ -65,21 +68,15 @@ function setObjectPositionAndScale(scene, imageData) {
 
     const videoPlane = scene.getObjectByName("videoPlane");
 
-    // videoPlane.computeBoundingBox();
-    // console.log('videoPlane.boundingBox:', videoPlane.boundingBox);
-
-    // pixel to millimeter conversion  "(image.height / image.dpi * 2.54 * 10) / 2.0"
-    // pixels / dpi (converts to inches)
-    // times 2.54 (converts to cm)
-    // times 10 (converts to mm)
-
     const imageHeightMM = imageData.height / imageData.dpi * 2.54 * 10;
     const imageWidthMM = imageData.width / imageData.dpi * 2.54 * 10;
+
+    const videoScale = Math.floor(imageWidthMM / videoPlane.geometry.parameters.width);
 
     videoPlane.position.y =  imageHeightMM / 2.0;
     videoPlane.position.x =  imageWidthMM / 2.0;
     
-    videoPlane.scale.set(60, 60, 60);
+    videoPlane.scale.set(videoScale, videoScale, 1);
     videoPlane.visible = true;
 }
 
