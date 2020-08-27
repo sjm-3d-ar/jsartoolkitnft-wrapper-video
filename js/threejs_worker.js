@@ -61,18 +61,23 @@ const setupScene = (renderer, scene, camera, root, marker) => {
     root.add(videoPlane);
 };
 
-function updateVideoPosition(scene, imageData) {
+function setObjectPositionAndScale(scene, imageData) {
 
     const videoPlane = scene.getObjectByName("videoPlane");
 
-    // TODO: Note, the objects positioning over the tracked object gets set
-    // TODO: in ARnft.js add() method
-    // TODO: pixel to meter conversion?  "(msg.height / msg.dpi * 2.54 * 10) / 2.0"
-    // TODO: NOTE, it seems the msg height, dpi values are retrieved from then marker descriptor files (not the)
-    // TODO: which is probably why this is set using 'getNFTData' event (likely triggered once desc files are loaded)
+    // videoPlane.computeBoundingBox();
+    // console.log('videoPlane.boundingBox:', videoPlane.boundingBox);
 
-    videoPlane.position.y = (imageData.height / imageData.dpi * 2.54 * 10) / 2.0;
-    videoPlane.position.x = (imageData.width / imageData.dpi * 2.54 * 10) / 2.0;
+    // pixel to millimeter conversion  "(image.height / image.dpi * 2.54 * 10) / 2.0"
+    // pixels / dpi (converts to inches)
+    // times 2.54 (converts to cm)
+    // times 10 (converts to mm)
+
+    const imageHeightMM = imageData.height / imageData.dpi * 2.54 * 10;
+    const imageWidthMM = imageData.width / imageData.dpi * 2.54 * 10;
+
+    videoPlane.position.y =  imageHeightMM / 2.0;
+    videoPlane.position.x =  imageWidthMM / 2.0;
     
     videoPlane.scale.set(60, 60, 60);
     videoPlane.visible = true;
@@ -176,7 +181,7 @@ function start(marker, cameraVideo, cameraVideoW, cameraVideoH, cameraCanvas) {
                         width: nft.width,
                         height: nft.height,
                     };
-                    updateVideoPosition(scene, imageData);
+                    setObjectPositionAndScale(scene, imageData);
                     break;
                 }
                 
