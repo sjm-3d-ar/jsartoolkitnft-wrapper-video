@@ -3,6 +3,12 @@
  */
 var cameraVideo = document.getElementById('cameraVideo');
 var cameraCanvas = document.getElementById('cameraCanvas');
+var tapToPlay = document.getElementById('tapToPlay');
+
+tapToPlay.onclick = () => {
+    document.getElementById('campaignVideo').play();
+    tapToPlay.style.display = "none";
+};
 
 /**
  * APP / VIDEO STREAM

@@ -26,6 +26,25 @@ html {
   font-weight: bold;
 }
 
+#tapToPlay {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 9999998;
+}
+
+#tapToPlay span{
+  color: white;
+  font-weight: bold;
+  margin: 30px;
+}
+
+
 #app {
   position: fixed;
   top: 0;
